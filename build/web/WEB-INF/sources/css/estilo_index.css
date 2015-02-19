@@ -1,0 +1,12 @@
+.add_redis{
+    border-radius: 15px;
+    margin-left: 20px;
+    background-color: #BF2727;
+    padding: 15px;
+}
+.comp_redis {
+    border-radius: 15px;
+    background-color: #D77474;
+    padding: 15px;
+    margin: 15px;
+}
