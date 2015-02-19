@@ -18,13 +18,22 @@ and open the template in the editor.
               href="/WEB-INF/sources/css/estilo_index.css" />
         <!--        <h:outputStylesheet library="WEB-INF/sources/css" name="estilo_index.css"  />-->
         <style>
+            .left{
+                width: 45%;
+                float: left;
+            }
+            .right{
+                width: 45%;
+                float: right;
+            }
             .add_redis{
                 border-radius: 15px;
                 margin-left: 20px;
                 background-color: #BF2727;
                 padding: 15px;
                 margin-bottom: 30px;
-                width: 50%;
+                width: 95%;
+                float: left;
             }
             .add_redis panelGrid {
                 background-color: white;
@@ -34,6 +43,7 @@ and open the template in the editor.
                 background-color: white;
                 padding: 15px;
                 margin: 15px;
+                float: left;
             }
 
             .add_mysql{
@@ -42,7 +52,8 @@ and open the template in the editor.
                 background-color: skyblue;
                 padding: 15px;
                 margin-bottom: 30px;
-                width: 40%;
+                width: 95%;
+                float: left;
             }
 
 
@@ -51,203 +62,220 @@ and open the template in the editor.
                 background-color: white;
                 padding: 15px;
                 margin: 15px;
+                float: left;
+                width: 90%;
             }
             .msql {
                 margin-left: 25px;
+                float: left;
+            }
+            .bbddRedis {
+                float: right;
+                width: 95%;
+                float: right
+            }
+            #withIcon222 {
+                margin: 50px;
             }
         </style>
     </h:head>
     <h:body>
 
+        <div class="left">
+            <img src="http://blog.pagodabox.com/wp-content/uploads/2012/03/redis.png" width="200"/>
+            <div class="add_redis">
+                <div class="comp_redis">
 
-        <img src="http://blog.pagodabox.com/wp-content/uploads/2012/03/redis.png" width="200"/>
-        <div class="add_redis">
-            <div class="comp_redis">
 
+                    <p:tabView dynamic="true" cache="true">
+                        <p:tab title="Borrar Key">
 
-                <p:tabView dynamic="true" cache="true">
-                    <p:tab title="Borrar Key">
-                        
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <h:form>
-                                
-                                Nombre Key: <h:inputText value="#{RedisControllerBean.nameKeyRemove}" id="nameKeyRemove"/><br/><br/>
-                                <p:growl id="growl3" life="2000" />
-                                <p:commandButton value="Borrar Key" id="withIcon3" actionListener="#{RedisControllerBean.removeKeyRedis()}" update="growl3" icon="ui-icon-disk" /><br/>
-                            </h:form>
-                        </h:panelGrid>
-                    </p:tab>
-                    <p:tab title="Añadir Set">
-                        <h:messages id="msg" showDetail="true" for="añadeSet" />
-                        <h:panelGrid columns="2" cellpadding="10" id="añadeSet">
-                            <h:form>
-                                Nombre: <h:inputText value="#{RedisControllerBean.nameSet}" id="nameSet"/><br/><br/>
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <h:form>
 
-                                Valor: <h:inputText value="#{RedisControllerBean.txtSetRedis}" id="txtSetRedis"/><br/><br/>
+                                    Nombre Key: <h:inputText value="#{RedisControllerBean.nameKeyRemove}" id="nameKeyRemove"/><br/><br/>
+                                    <p:growl id="growl3" life="2000" />
+                                    <p:commandButton value="Borrar Key" id="withIcon3" actionListener="#{RedisControllerBean.removeKeyRedis()}" update="growl3" icon="ui-icon-disk" /><br/>
+                                </h:form>
+                            </h:panelGrid>
+                        </p:tab>
+                        <p:tab title="Añadir Set">
+                            <h:messages id="msg" showDetail="true" for="añadeSet" />
+                            <h:panelGrid columns="2" cellpadding="10" id="añadeSet">
+                                <h:form>
+                                    Nombre: <h:inputText value="#{RedisControllerBean.nameSet}" id="nameSet"/><br/><br/>
 
-                                <p:growl id="growl" life="2000" />
-                                <p:commandButton value="Añadir" id="withIcon" actionListener="#{RedisControllerBean.addSet()}" update="growl" icon="ui-icon-disk" /><br/>
-                            </h:form>
-                        </h:panelGrid>
-                    </p:tab>
-                    <p:tab title="Borrar Set">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <h:form>
-                                Nombre: <h:inputText value="#{RedisControllerBean.nameRemoveSet}" id="nameRemoveSet"/><br/><br/>
-                                Valor: <h:inputText value="#{RedisControllerBean.valorRemoveSet}" id="valorRemoveSet"/><br/><br/>
-                                <p:growl id="growl" life="2000" />
-                                <p:commandButton value="Borrar Key" id="withIcon" actionListener="#{RedisControllerBean.removeSetRedis()}" update="growl" icon="ui-icon-disk" /><br/>
-                            </h:form>
-                        </h:panelGrid>
-                    </p:tab>
+                                    Valor: <h:inputText value="#{RedisControllerBean.txtSetRedis}" id="txtSetRedis"/><br/><br/>
 
-                    <p:tab title="Añadir Hash">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <h:form>
-                                Nombre: <h:inputText value="#{RedisControllerBean.nameHash}" id="nameHash"/><br/><br/>
-                                Key: <h:inputText value="#{RedisControllerBean.nameKeyHash}" id="nameKeyHash"/><br/><br/>
-                                Valor: <h:inputText value="#{RedisControllerBean.nameValueHash}" id="nameValueHash"/><br/><br/>
+                                    <p:growl id="growl" life="2000" />
+                                    <p:commandButton value="Añadir" id="withIcon" actionListener="#{RedisControllerBean.addSet()}" update="growl" icon="ui-icon-disk" /><br/>
+                                </h:form>
+                            </h:panelGrid>
+                        </p:tab>
+                        <p:tab title="Borrar Set">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <h:form>
+                                    Nombre: <h:inputText value="#{RedisControllerBean.nameRemoveSet}" id="nameRemoveSet"/><br/><br/>
+                                    Valor: <h:inputText value="#{RedisControllerBean.valorRemoveSet}" id="valorRemoveSet"/><br/><br/>
+                                    <p:growl id="growl" life="2000" />
+                                    <p:commandButton value="Borrar Key" id="withIcon" actionListener="#{RedisControllerBean.removeSetRedis()}" update="growl" icon="ui-icon-disk" /><br/>
+                                </h:form>
+                            </h:panelGrid>
+                        </p:tab>
 
-                                <p:growl id="growl4" life="2000" />
-                                <p:commandButton value="Añadir Hash" id="withIcon4" actionListener="#{RedisControllerBean.addHash()}" update="growl4" icon="ui-icon-disk" /><br/>
-                            </h:form>
-                        </h:panelGrid>
-                    </p:tab>
-                    <p:tab title="Borrar Hash">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <h:form>
-                                Nombre: <h:inputText value="#{RedisControllerBean.nameHash}" id="nameHash"/><br/><br/>
-                                Key: <h:inputText value="#{RedisControllerBean.nameKeyHash}" id="nameKeyHash"/><br/><br/>
-                                Valor: <h:inputText value="#{RedisControllerBean.nameValueHash}" id="nameValueHash"/><br/><br/>
+                        <p:tab title="Añadir Hash">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <h:form>
+                                    Nombre: <h:inputText value="#{RedisControllerBean.nameHash}" id="nameHash"/><br/><br/>
+                                    Key: <h:inputText value="#{RedisControllerBean.nameKeyHash}" id="nameKeyHash"/><br/><br/>
+                                    Valor: <h:inputText value="#{RedisControllerBean.nameValueHash}" id="nameValueHash"/><br/><br/>
 
-                                <p:growl id="growl5" life="2000" />
-                                <p:commandButton value="Borrar Hash" id="withIcon5" actionListener="#{RedisControllerBean.deleteHash()}" update="growl5" icon="ui-icon-disk" /><br/>
-                            </h:form>
-                        </h:panelGrid>
-                    </p:tab>
-                    <p:tab title="Añadir List R/L">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <h:form>
-                                Nombre: <h:inputText value="#{RedisControllerBean.nameList}" id="nameList"/><br/><br/>
-                                Valor: <h:inputText value="#{RedisControllerBean.nameValueList}" id="nameValueList"/><br/><br/>
-                                <p:outputLabel for="modoList" value="Método:" />
-                                <p:selectOneRadio id="modoList" value="#{RedisControllerBean.modoList}">
-                                    <f:selectItem itemLabel="LPUSH" itemValue="lpush" />
-                                    <f:selectItem itemLabel="RPUSH" itemValue="rpush" />
-                                </p:selectOneRadio><br/><br/>
-                                <p:growl id="growl6" life="2000" />
-                                <p:commandButton value="Añadir Lista" id="withIcon6" actionListener="#{RedisControllerBean.addList()}" update="growl6" icon="ui-icon-disk" /><br/>
-                            </h:form>
-                        </h:panelGrid>
-                    </p:tab>
-                    <p:tab title="Añadir List Index">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <h:form>
-                                Nombre: <h:inputText value="#{RedisControllerBean.nameList}" id="nameList"/><br/><br/>
-                                Valor: <h:inputText value="#{RedisControllerBean.nameValueList}" id="nameValueList"/><br/><br/>
-<!--                                    Indice: <h:inputText value="#{RedisControllerBean.indexList}" id="indexList"/><br/><br/>-->
-                                <h:outputLabel for="basic" value="Indice: " />
-                                <p:spinner id="basic" value="#{RedisControllerBean.indexList}" size="3" /><br/><br/>
-                                <p:growl id="growl7" life="2000" />
-                                <p:commandButton value="Añadir Lista" id="withIcon7" actionListener="#{RedisControllerBean.addListIndex()}" update="growl7" icon="ui-icon-disk" /><br/>
-                            </h:form>
-                        </h:panelGrid>
-                    </p:tab>
-                    <p:tab title="Borrar List">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <h:form>
-                                Nombre: <h:inputText value="#{RedisControllerBean.nameList}" id="nameList"/><br/><br/>
-                                Valor: <h:inputText value="#{RedisControllerBean.nameValueList}" id="nameValueList"/><br/><br/>
-                                Indice: <h:inputText value="#{RedisControllerBean.indexList}" id="indexList"/><br/><br/>
-                                <p:growl id="growl8" life="2000" />
-                                <p:commandButton value="Borrar List" id="withIcon8" actionListener="#{RedisControllerBean.deleteList()}" update="growl8" icon="ui-icon-disk" /><br/>
-                            </h:form>
-                        </h:panelGrid>
-                    </p:tab>
-                </p:tabView>
+                                    <p:growl id="growl4" life="2000" />
+                                    <p:commandButton value="Añadir Hash" id="withIcon4" actionListener="#{RedisControllerBean.addHash()}" update="growl4" icon="ui-icon-disk" /><br/>
+                                </h:form>
+                            </h:panelGrid>
+                        </p:tab>
+                        <p:tab title="Borrar Hash">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <h:form>
+                                    Nombre: <h:inputText value="#{RedisControllerBean.nameHash}" id="nameHash"/><br/><br/>
+                                    Key: <h:inputText value="#{RedisControllerBean.nameKeyHash}" id="nameKeyHash"/><br/><br/>
+                                    Valor: <h:inputText value="#{RedisControllerBean.nameValueHash}" id="nameValueHash"/><br/><br/>
 
+                                    <p:growl id="growl5" life="2000" />
+                                    <p:commandButton value="Borrar Hash" id="withIcon5" actionListener="#{RedisControllerBean.deleteHash()}" update="growl5" icon="ui-icon-disk" /><br/>
+                                </h:form>
+                            </h:panelGrid>
+                        </p:tab>
+                        <p:tab title="Añadir List R/L">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <h:form>
+                                    Nombre: <h:inputText value="#{RedisControllerBean.nameList}" id="nameList"/><br/><br/>
+                                    Valor: <h:inputText value="#{RedisControllerBean.nameValueList}" id="nameValueList"/><br/><br/>
+                                    <p:outputLabel for="modoList" value="Método:" />
+                                    <p:selectOneRadio id="modoList" value="#{RedisControllerBean.modoList}">
+                                        <f:selectItem itemLabel="LPUSH" itemValue="lpush" />
+                                        <f:selectItem itemLabel="RPUSH" itemValue="rpush" />
+                                    </p:selectOneRadio><br/><br/>
+                                    <p:growl id="growl6" life="2000" />
+                                    <p:commandButton value="Añadir Lista" id="withIcon6" actionListener="#{RedisControllerBean.addList()}" update="growl6" icon="ui-icon-disk" /><br/>
+                                </h:form>
+                            </h:panelGrid>
+                        </p:tab>
+                        <p:tab title="Añadir List Index">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <h:form>
+                                    Nombre: <h:inputText value="#{RedisControllerBean.nameList}" id="nameList"/><br/><br/>
+                                    Valor: <h:inputText value="#{RedisControllerBean.nameValueList}" id="nameValueList"/><br/><br/>
+    <!--                                    Indice: <h:inputText value="#{RedisControllerBean.indexList}" id="indexList"/><br/><br/>-->
+                                    <h:outputLabel for="basic" value="Indice: " />
+                                    <p:spinner id="basic" value="#{RedisControllerBean.indexList}" size="3" /><br/><br/>
+                                    <p:growl id="growl7" life="2000" />
+                                    <p:commandButton value="Añadir Lista" id="withIcon7" actionListener="#{RedisControllerBean.addListIndex()}" update="growl7" icon="ui-icon-disk" /><br/>
+                                </h:form>
+                            </h:panelGrid>
+                        </p:tab>
+                        <p:tab title="Borrar List">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <h:form>
+                                    Nombre: <h:inputText value="#{RedisControllerBean.nameList}" id="nameList"/><br/><br/>
+                                    Valor: <h:inputText value="#{RedisControllerBean.nameValueList}" id="nameValueList"/><br/><br/>
+                                    Indice: <h:inputText value="#{RedisControllerBean.indexList}" id="indexList"/><br/><br/>
+                                    <p:growl id="growl8" life="2000" />
+                                    <p:commandButton value="Borrar List" id="withIcon8" actionListener="#{RedisControllerBean.deleteList()}" update="growl8" icon="ui-icon-disk" /><br/>
+                                </h:form>
+                            </h:panelGrid>
+                        </p:tab>
+                    </p:tabView>
+
+                </div>
+            </div>
+            <img class="msql" src=" http://www.redchillinetwork.co.uk/wp-content/uploads/2012/08/mysql-logo-wallpaper1.jpg" width="200"/>
+            <div class="add_mysql">
+                <div class="comp_mysql">
+                    <h:form>
+                        <p:accordionPanel dynamic="true" >
+                            <p:tab title="Crear Tabla">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <h:form>
+
+                                        Nombre tabla: <h:inputText value="#{mySqlControllerBean.nameTable}"/><br/><br/>
+
+                                        Nombre del campo: <h:inputText value="#{mySqlControllerBean.nameFila}"/>
+
+                                        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                                            <p:outputLabel value="Tipo:" />
+                                            <p:selectOneMenu  value="#{mySqlControllerBean.tipoDato}" style="width:125px">
+                                                <f:selectItem itemLabel="Selecciona uno" itemValue="" />
+                                                <f:selectItem itemValue="int" itemLabel="INT" />
+                                                <f:selectItem itemValue="longtext" itemLabel="LONGTEXT" />
+                                                <f:selectItem itemValue="varchar50" itemLabel="VARCHAR(50)" />
+                                                <f:selectItem itemValue="varchar150" itemLabel="VARCHAR(150)" />
+                                                <f:selectItem itemValue="date" itemLabel="DATE" />
+                                            </p:selectOneMenu>
+                                        </h:panelGrid><br/><br/>
+                                        <h:panelGrid columns="3" cellpadding="5">
+                                            <h:outputLabel for="menu" value="Tipo" />
+                                            <p:selectCheckboxMenu id="menu" value="#{CheckboxTipoMysql.tipoSeleccionado}" label="Atributos: "
+                                                                  filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+                                                <f:selectItems value="#{CheckboxTipoMysql.tipo}" />
+                                            </p:selectCheckboxMenu>
+                                            <p:commandButton value="Añadir" action="#{mySqlControllerBean.createTable()}" />
+                                        </h:panelGrid>
+                                    </h:form>
+                                </h:panelGrid>
+                            </p:tab>
+                            <p:tab title="Borrar Tabla">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <h:form>
+                                        Nombre tabla: <h:inputText value="#{mySqlControllerBean.nameTable}"/><br/><br/>
+                                        <p:commandButton value="Añadir" action="#{mySqlControllerBean.deleteTable()}" />
+                                    </h:form>
+                                </h:panelGrid>
+                            </p:tab>
+                            <p:tab title="Insertar Valores">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <h:form>
+                                        Nombre tabla: <h:inputText value="#{mySqlControllerBean.nameTable}"/><br/><br/>
+                                        Nombre campo: <h:inputText value="#{mySqlControllerBean.nameFila}"/><br/><br/>
+                                        Valor:  <h:inputText value="#{mySqlControllerBean.valorInsert}"/><br/><br/>
+                                        <p:commandButton value="Añadir" action="#{mySqlControllerBean.insertTable()}" />
+                                    </h:form>
+                                </h:panelGrid>
+                            </p:tab>
+                        </p:accordionPanel>
+                    </h:form>
+                </div>
             </div>
         </div>
-        <img class="msql" src=" http://www.redchillinetwork.co.uk/wp-content/uploads/2012/08/mysql-logo-wallpaper1.jpg" width="200"/>
-        <div class="add_mysql">
-            <div class="comp_mysql">
+        <div class="left">
+            <div class="bbddRedis">
                 <h:form>
-                    <p:accordionPanel dynamic="true" >
-                        <p:tab title="Crear Tabla">
-                            <h:panelGrid columns="2" cellpadding="10">
-                                <h:form>
+                    <ui:repeat var="o" value="#{RedisControllerBean.extraerKeys()}">
+                        <h:inputHidden value="#{o}" id="name"/>
+                        <p:commandButton value="#{o}" id="withIcon222" actionListener="#{RedisControllerBean.extraerKey(o)}"  icon="ui-icon-disk" />
+        <!--                <h:commandButton value="#{o}" action="#{RedisControllerBean.extraerKey(o)}" />-->
 
-                                    Nombre tabla: <h:inputText value="#{mySqlControllerBean.nameTable}"/><br/><br/>
+                    </ui:repeat>
+                </h:form>    
 
-                                    Nombre del campo: <h:inputText value="#{mySqlControllerBean.nameFila}"/>
 
-                                    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-                                        <p:outputLabel value="Tipo:" />
-                                        <p:selectOneMenu  value="#{mySqlControllerBean.tipoDato}" style="width:125px">
-                                            <f:selectItem itemLabel="Selecciona uno" itemValue="" />
-                                            <f:selectItem itemValue="int" itemLabel="INT" />
-                                            <f:selectItem itemValue="longtext" itemLabel="LONGTEXT" />
-                                            <f:selectItem itemValue="varchar50" itemLabel="VARCHAR(50)" />
-                                            <f:selectItem itemValue="varchar150" itemLabel="VARCHAR(150)" />
-                                            <f:selectItem itemValue="date" itemLabel="DATE" />
-                                        </p:selectOneMenu>
-                                    </h:panelGrid><br/><br/>
-                                    <h:panelGrid columns="3" cellpadding="5">
-                                        <h:outputLabel for="menu" value="Tipo" />
-                                        <p:selectCheckboxMenu id="menu" value="#{CheckboxTipoMysql.tipoSeleccionado}" label="Atributos: "
-                                                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
-                                            <f:selectItems value="#{CheckboxTipoMysql.tipo}" />
-                                        </p:selectCheckboxMenu>
-                                        <p:commandButton value="Añadir" action="#{mySqlControllerBean.createTable()}" />
-                                    </h:panelGrid>
-                                </h:form>
-                            </h:panelGrid>
-                        </p:tab>
-                        <p:tab title="Borrar Tabla">
-                            <h:panelGrid columns="2" cellpadding="10">
-                                <h:form>
-                                    Nombre tabla: <h:inputText value="#{mySqlControllerBean.nameTable}"/><br/><br/>
-                                    <p:commandButton value="Añadir" action="#{mySqlControllerBean.deleteTable()}" />
-                                </h:form>
-                            </h:panelGrid>
-                        </p:tab>
-                        <p:tab title="Insertar Valores">
-                            <h:panelGrid columns="2" cellpadding="10">
-                                <h:form>
-                                    Nombre tabla: <h:inputText value="#{mySqlControllerBean.nameTable}"/><br/><br/>
-                                    Nombre campo: <h:inputText value="#{mySqlControllerBean.nameFila}"/><br/><br/>
-                                    Valor:  <h:inputText value="#{mySqlControllerBean.valorInsert}"/><br/><br/>
-                                    <p:commandButton value="Añadir" action="#{mySqlControllerBean.insertTable()}" />
-                                </h:form>
-                            </h:panelGrid>
-                        </p:tab>
-                    </p:accordionPanel>
+                <!--        <h:form>
+                            <h:inputHidden value="set" id="nameExtraeKey" />
+                            <p:growl id="growl123" life="2000" />
+                            <p:commandButton value="jorge" id="withIcon123" actionListener="#{RedisControllerBean.extraerKey(nameExtraeKey)}" update="growl123" icon="ui-icon-disk" /><br/>
+                
+                        </h:form>-->
+                <h:form>
+                    <h:outputText value="#{RedisControllerBean.resultKey}"></h:outputText>
                 </h:form>
+                <h:dataTable value="#{RedisControllerBean.resultKey}" var="ou">
+                    <h:column>
+                        #{ou}
+
+                    </h:column>
+                </h:dataTable>   
             </div>
         </div>
-
-        <h:form>
-            <ui:repeat var="o" value="#{RedisControllerBean.extraerKeys()}">
-                <h:inputHidden value="#{o}" id="nameExtraeKey" />
-<!--                <p:commandButton value="#{o}" id="withIcon222" actionListener="#{RedisControllerBean.extraerKey(o)}"  icon="ui-icon-disk" /><br/>-->
-                <h:commandButton value="#{o}" action="#{RedisControllerBean.extraerKey(o)}" />
-                
-            </ui:repeat>
-        </h:form>    
-             
-        
-        <h:form>
-            <h:inputHidden value="set" id="nameExtraeKey" />
-            <p:growl id="growl123" life="2000" />
-            <p:commandButton value="jorge" id="withIcon123" actionListener="#{RedisControllerBean.extraerKey(nameExtraeKey)}" update="growl123" icon="ui-icon-disk" /><br/>
-
-        </h:form>
-
-        <h:dataTable value="#{RedisControllerBean.resultKey}" var="ou">
-            <h:column>
-                #{ou}
-            </h:column>
-        </h:dataTable>   
-
     </h:body>
 </html>

@@ -105,44 +105,8 @@ public class RedisModelBean  implements Serializable {
     }
     
 
-//    public List verListRedis() {
-//       
-//        Jedis connJedis = new Jedis("localhost");
-//        connJedis.select(2);
-//        
-//        Map<String, String> keys = connJedis.hgetAll("contenedor:tipo");
-//        
-//        List result = new ArrayList();
-//        List resultSet = new ArrayList();
-//        List resultList = new ArrayList();
-//        List resultHash = new ArrayList();
-//        for (Map.Entry<String, String> entry : keys.entrySet()) {
-//            String nameKey = entry.getKey();
-//            String tipoKey = entry.getValue();
-//            switch (tipoKey){
-//                case "set":
-//                    Set set = connJedis.smembers(nameKey);
-//                    resultSet.addAll(set);
-//                    break;
-//                case "hash":
-//                    Map<String, String> hash = connJedis.hgetAll(nameKey);
-//                    resultHash.add(hash);
-//                    break;
-//                case "list":
-//                    List<String> list = connJedis.lrange(nameKey,0,-1);
-//                    resultList.add(list);
-//                    break;  
-//            }
-//        }
-//        result.addAll(resultSet);
-////       
-//        
-//        result.addAll(resultHash);
-//        result.addAll(resultList);
-//               
-//         return result;
-//    }
     
+    // Con este metodo sacamos todos los nombres de las keys
     public Set extraerKeysRedis(){
         Set resultAllKeys;
         
@@ -157,6 +121,7 @@ public class RedisModelBean  implements Serializable {
         return resultAllKeys;
     }
     
+    //este método de con un name de una key concreta saca su contenido.
     public List extraerKeyRedis(String nameExtraeKey){
         Jedis connJedis = new Jedis("localhost");
         connJedis.select(2);
@@ -179,16 +144,7 @@ public class RedisModelBean  implements Serializable {
             }
         
         return resultKey;
-//        if (type.equals("set")){
-//            Set set = connJedis.smembers(name);
-//            return set;
-//        }else if (type.equals("hash")){
-//            Map<String, String> hash = connJedis.hgetAll(name);
-//            return hash;
-//        }else if (type.equals("list")){
-//             List<String> list = connJedis.lrange(name,0,-1);
-//             return list;
-//        }
+
   }
         
     }
