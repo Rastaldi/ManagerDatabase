@@ -157,23 +157,32 @@ public class RedisModelBean  implements Serializable {
         return resultAllKeys;
     }
     
-    public List extraerKeyRedis(String nameExtraeKey){
+    //Ahora no retorna nada se lo asigna a una lista que ya tienes
+    public List<String> extraerKeyRedis(String nameExtraeKey){
         Jedis connJedis = new Jedis("localhost");
         connJedis.select(2);
         List resultKey = new ArrayList();
         String type = connJedis.type(nameExtraeKey);
         switch (type){
                 case "set":
-                    Set set = connJedis.smembers(nameExtraeKey);
-                    resultKey.add(set);
+                    Set<String> set = connJedis.smembers(nameExtraeKey);
+                    for (String s : set) {
+                        resultKey.add(s);
+                    }
                     break;
                 case "hash":
                     Map<String, String> hash = connJedis.hgetAll(nameExtraeKey);
-                    resultKey.add(hash);
+                    for (Map.Entry<String, String> entry : hash.entrySet()) {
+                            String nameKey = entry.getKey();
+                            String tipoKey = entry.getValue();
+                            resultKey.add(nameKey+"="+tipoKey);
+                    }
                     break;
                 case "list":
                     List<String> list = connJedis.lrange(nameExtraeKey,0,-1);
-                    resultKey.add(list);
+                    for (String s : list) {
+                        resultKey.add(s);
+                    }
                     
                     break;  
             }

@@ -228,22 +228,16 @@ and open the template in the editor.
 
         <h:form>
             <ui:repeat var="o" value="#{RedisControllerBean.extraerKeys()}">
-                <h:inputHidden value="#{o}" id="nameExtraeKey" />
-<!--                <p:commandButton value="#{o}" id="withIcon222" actionListener="#{RedisControllerBean.extraerKey(o)}"  icon="ui-icon-disk" /><br/>-->
+                <h:inputHidden value="#{o}" />
+              
                 <h:commandButton value="#{o}" action="#{RedisControllerBean.extraerKey(o)}" />
                 
             </ui:repeat>
         </h:form>    
              
-        
-        <h:form>
-            <h:inputHidden value="set" id="nameExtraeKey" />
-            <p:growl id="growl123" life="2000" />
-            <p:commandButton value="jorge" id="withIcon123" actionListener="#{RedisControllerBean.extraerKey(nameExtraeKey)}" update="growl123" icon="ui-icon-disk" /><br/>
 
-        </h:form>
 
-        <h:dataTable value="#{RedisControllerBean.resultKey}" var="ou">
+        <h:dataTable value="#{RedisControllerBean.result}" var="ou">
             <h:column>
                 #{ou}
             </h:column>

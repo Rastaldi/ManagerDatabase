@@ -25,6 +25,7 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 
 public class RedisControllerBean implements Serializable{
+    List result;
 
     //declaramos las variable scon las que trabajara nuestro bean q vendran de la vista
      String nameSet;
@@ -52,7 +53,7 @@ public class RedisControllerBean implements Serializable{
     public RedisControllerBean() {
         redisModelBean = new RedisModelBean();
         resultAllKeys = redisModelBean.extraerKeysRedis();
-        AllKeys = new ArrayList <String>();
+
         resultKey = new ArrayList();
     }
 
@@ -194,7 +195,16 @@ public class RedisControllerBean implements Serializable{
         this.msg = msg;
     }
 
- 
+ //result
+
+    public List getResult() {
+        return result;
+    }
+
+    public void setResult(List result) {
+        this.result = result;
+    }
+    
    
     
     
@@ -272,9 +282,8 @@ public class RedisControllerBean implements Serializable{
      }
     
      
-     public String extraerKey(String nameExtraeKey){
-         
-         resultKey = redisModelBean.extraerKeyRedis(nameExtraeKey);
-         return "index";
+     public List extraerKey(String nameExtraeKey){
+         result = redisModelBean.extraerKeyRedis(nameExtraeKey);
+         return result;
      }
 }
