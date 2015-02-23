@@ -264,17 +264,17 @@ public class RedisControllerBean implements Serializable{
      //extraemos todas las keys para poder crear los buttons con el nombre de cada tabla
      public List<String> extraerKeys() {
          resultAllKeys = redisModelBean.extraerKeysRedis();
-//           for(String s : resultAllKeys) {
-//               System.out.println("+++ " + s + " +++++\n");
-//               AllKeys.add(s);
-//           }
+           for(String s : resultAllKeys) {
+               System.out.println("+++ " + s + " +++++\n");
+               AllKeys.add(s);
+           }
         return AllKeys; 
      }
     
      
-     public List<String> extraerKey(String nameExtraeKey){
+     public String extraerKey(String nameExtraeKey){
          
          resultKey = redisModelBean.extraerKeyRedis(nameExtraeKey);
-         return resultKey;
+         return "index";
      }
 }
