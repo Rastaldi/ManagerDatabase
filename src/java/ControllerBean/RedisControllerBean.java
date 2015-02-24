@@ -36,7 +36,7 @@ public class RedisControllerBean implements Serializable{
     RedisModelBean redisModelBean;
     Set <String> resultAllKeys;
     List resultKey;
-    List <String> AllKeys;
+    List <String> allKeys = new ArrayList();
     String nameExtraeKey;
     String nameHash;
     String nameKeyHash;
@@ -52,8 +52,8 @@ public class RedisControllerBean implements Serializable{
      */
     public RedisControllerBean() {
         redisModelBean = new RedisModelBean();
-        resultAllKeys = redisModelBean.extraerKeysRedis();
-
+       resultAllKeys = redisModelBean.extraerKeysRedis();
+//        List <String> allKeys = new ArrayList();
         resultKey = new ArrayList();
     }
 
@@ -204,6 +204,14 @@ public class RedisControllerBean implements Serializable{
     public void setResult(List result) {
         this.result = result;
     }
+
+    public List<String> getAllKeys() {
+        return allKeys;
+    }
+
+    public void setAllKeys(List<String> allKeys) {
+        this.allKeys = allKeys;
+    }
     
    
     
@@ -275,10 +283,14 @@ public class RedisControllerBean implements Serializable{
      public List<String> extraerKeys() {
          resultAllKeys = redisModelBean.extraerKeysRedis();
            for(String s : resultAllKeys) {
-               System.out.println("+++ " + s + " +++++\n");
-               AllKeys.add(s);
+//               System.out.println("+++ " + s + " +++++\n");
+               allKeys.add(s);
            }
-        return AllKeys; 
+//          Iterator iterator = resultAllKeys.iterator();
+//             while (iterator.hasNext()) {
+//             allKeys.add(iterator.toString());
+//         }
+        return allKeys; 
      }
     
      

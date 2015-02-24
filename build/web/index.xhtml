@@ -228,10 +228,7 @@ and open the template in the editor.
 
         <h:form>
             <ui:repeat var="o" value="#{RedisControllerBean.extraerKeys()}">
-                <h:inputHidden value="#{o}" />
-              
                 <h:commandButton value="#{o}" action="#{RedisControllerBean.extraerKey(o)}" />
-                
             </ui:repeat>
         </h:form>    
              
