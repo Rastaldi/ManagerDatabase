@@ -5,7 +5,7 @@
  */
 package ControllerBean;
 
-import javax.enterprise.context.SessionScoped;
+
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -16,7 +16,7 @@ import javax.faces.context.FacesContext;
  * @author Rastaldi
  */
 @ManagedBean (name="msgController")
-@SessionScoped
+
 public class MessagesControllerBean implements Serializable {
 
     /**

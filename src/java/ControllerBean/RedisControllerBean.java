@@ -7,6 +7,7 @@ package ControllerBean;
 
 import ModelBean.RedisModelBean;
 import java.io.Serializable;
+import static java.lang.System.console;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -15,6 +16,7 @@ import java.util.Set;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 
 /**
@@ -45,16 +47,20 @@ public class RedisControllerBean implements Serializable{
     String nameList;
     String nameValueList;        
     Long indexList;
-    FacesMessage msg;
+    
+   
+    FacesContext msg;
             
     /**
      * Creates a new instance of RedisControllerBean
      */
     public RedisControllerBean() {
         redisModelBean = new RedisModelBean();
-       resultAllKeys = redisModelBean.extraerKeysRedis();
+        //resultKey = new ArrayList();
+       allKeys = new ArrayList();
+       //resultAllKeys = redisModelBean.extraerKeysRedis();
 //        List <String> allKeys = new ArrayList();
-        resultKey = new ArrayList();
+         
     }
 
     public String getNameSet() {
@@ -187,13 +193,7 @@ public class RedisControllerBean implements Serializable{
         this.indexList = indexList;
     }
 
-    public FacesMessage getMsg() {
-        return msg;
-    }
 
-    public void setMsg(FacesMessage msg) {
-        this.msg = msg;
-    }
 
  //result
 
@@ -220,24 +220,33 @@ public class RedisControllerBean implements Serializable{
     
     //aqui añadimos un set a redis + un campo
      public String addSet(){
-        
-        if (redisModelBean.addRedisSet(nameSet, txtSetRedis)){
+        if (redisModelBean.addRedisSet(nameSet, txtSetRedis) == true){
             //redisModelBean.addRedisSet(nameSet, txtSetRedis);
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Action sucessfull.");
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Se a actualizado su DB."));
         }else {
-            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Debe introducir valores.");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Imposible conectar con la DB."));
         }
+       
             return "index";
             //return "";
        }
      //borramos una key
      public String removeKeyRedis() {
-         redisModelBean.removeKey(nameKeyRemove);
+         
+         if (redisModelBean.removeKey(nameKeyRemove) == true){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Key borrada."));
+        }else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Key no existente."));
+        }
          return "index";
      }
      //borramos un campo especifico de un set
      public String removeSetRedis(){
-         redisModelBean.removeSet(nameRemoveSet, valorRemoveSet);
+         if (redisModelBean.removeSet(nameRemoveSet, valorRemoveSet) == true){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Set borrado satisfactoriamente."));
+        }else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No existe el Set, comprueba el nombre."));
+        }
          return "index";
      }
        //aqui le mandamos a la vista todo lo que hay en nuestra base de datos.
@@ -297,5 +306,19 @@ public class RedisControllerBean implements Serializable{
      public List extraerKey(String nameExtraeKey){
          result = redisModelBean.extraerKeyRedis(nameExtraeKey);
          return result;
+     }
+     
+     public List actualizarKeys(){
+         allKeys = new ArrayList();
+         resultAllKeys = redisModelBean.extraerKeysRedis();
+           for(String s : resultAllKeys) {
+//               System.out.println("+++ " + s + " +++++\n");
+               allKeys.add(s);
+           }
+//          Iterator iterator = resultAllKeys.iterator();
+//             while (iterator.hasNext()) {
+//             allKeys.add(iterator.toString());
+//         }
+        return allKeys; 
      }
 }

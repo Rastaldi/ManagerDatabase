@@ -24,7 +24,8 @@ and open the template in the editor.
                 background-color: #BF2727;
                 padding: 15px;
                 margin-bottom: 30px;
-                width: 50%;
+                width: 100%;
+                float: left;
             }
             .add_redis panelGrid {
                 background-color: white;
@@ -42,7 +43,8 @@ and open the template in the editor.
                 background-color: skyblue;
                 padding: 15px;
                 margin-bottom: 30px;
-                width: 40%;
+                width: 100%; 
+                float: left;
             }
 
 
@@ -54,15 +56,48 @@ and open the template in the editor.
             }
             .msql {
                 margin-left: 25px;
+                margin-bottom: 25px;
+            }
+            
+            .tabla {
+                float: right;
+                width: 40%;
+                margin-top: 100px;
+                margin-right: 80px;
+            }
+            
+            .bbdd {
+                width: 50%;
+                float: left;
+                margin-top: 100px;
+            }
+            
+            .primafaces_table {
+                margin-top: 70px;
+                width: 200px;
+                float: left;
+                margin-right: 100px;
+            }
+            
+            .keybutton {
+                margin: 5px;
+                float: left;
+                
+            }
+            
+            
+            .btnredis {
+                 color: white;
+                background-color: red;
             }
         </style>
     </h:head>
     <h:body>
 
-
-        <img src="http://blog.pagodabox.com/wp-content/uploads/2012/03/redis.png" width="200"/>
+        <div class="bbdd">
         <div class="add_redis">
             <div class="comp_redis">
+        <img src="http://blog.pagodabox.com/wp-content/uploads/2012/03/redis.png" width="200"/>
 
 
                 <p:tabView dynamic="true" cache="true">
@@ -70,7 +105,7 @@ and open the template in the editor.
                         
                         <h:panelGrid columns="2" cellpadding="10">
                             <h:form>
-                                
+                                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
                                 Nombre Key: <h:inputText value="#{RedisControllerBean.nameKeyRemove}" id="nameKeyRemove"/><br/><br/>
                                 <p:growl id="growl3" life="2000" />
                                 <p:commandButton value="Borrar Key" id="withIcon3" actionListener="#{RedisControllerBean.removeKeyRedis()}" update="growl3" icon="ui-icon-disk" /><br/>
@@ -78,9 +113,10 @@ and open the template in the editor.
                         </h:panelGrid>
                     </p:tab>
                     <p:tab title="Añadir Set">
-                        <h:messages id="msg" showDetail="true" for="añadeSet" />
+                        
                         <h:panelGrid columns="2" cellpadding="10" id="añadeSet">
                             <h:form>
+                                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
                                 Nombre: <h:inputText value="#{RedisControllerBean.nameSet}" id="nameSet"/><br/><br/>
 
                                 Valor: <h:inputText value="#{RedisControllerBean.txtSetRedis}" id="txtSetRedis"/><br/><br/>
@@ -93,6 +129,7 @@ and open the template in the editor.
                     <p:tab title="Borrar Set">
                         <h:panelGrid columns="2" cellpadding="10">
                             <h:form>
+                                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
                                 Nombre: <h:inputText value="#{RedisControllerBean.nameRemoveSet}" id="nameRemoveSet"/><br/><br/>
                                 Valor: <h:inputText value="#{RedisControllerBean.valorRemoveSet}" id="valorRemoveSet"/><br/><br/>
                                 <p:growl id="growl" life="2000" />
@@ -168,9 +205,10 @@ and open the template in the editor.
 
             </div>
         </div>
-        <img class="msql" src=" http://www.redchillinetwork.co.uk/wp-content/uploads/2012/08/mysql-logo-wallpaper1.jpg" width="200"/>
         <div class="add_mysql">
             <div class="comp_mysql">
+                        <img class="msql" src=" http://www.redchillinetwork.co.uk/wp-content/uploads/2012/08/mysql-logo-wallpaper1.jpg" width="200"/>
+
                 <h:form>
                     <p:accordionPanel dynamic="true" >
                         <p:tab title="Crear Tabla">
@@ -225,20 +263,28 @@ and open the template in the editor.
                 </h:form>
             </div>
         </div>
+        </div>
+        <div class="tabla">
+            <h:form>
+                <h:commandButton value="Redis" action="#{RedisControllerBean.extraerKeys()}" styleClass="btnredis" />
+                <h:commandButton value="Actualizar" action="#{RedisControllerBean.actualizarKeys()}" />
+            </h:form>
+            <h:form>
+                <ui:repeat var="o" value="#{RedisControllerBean.allKeys}">
+                    <div class="keybutton">
+                    <h:commandButton value="#{o}" action="#{RedisControllerBean.extraerKey(o)}" />
+                    </div>
+                </ui:repeat>
+            </h:form>    
 
-        <h:form>
-            <ui:repeat var="o" value="#{RedisControllerBean.extraerKeys()}">
-                <h:commandButton value="#{o}" action="#{RedisControllerBean.extraerKey(o)}" />
-            </ui:repeat>
-        </h:form>    
-             
 
-
-        <h:dataTable value="#{RedisControllerBean.result}" var="ou">
-            <h:column>
-                #{ou}
-            </h:column>
-        </h:dataTable>   
-
+            <div class="primafaces_table">
+                <p:dataTable value="#{RedisControllerBean.result}" var="ou" style="color:red">
+                    <p:column headerText="#{o}">
+                        <h:outputText value="#{ou}" />
+                    </p:column>
+                </p:dataTable>   
+            </div>
+        </div>
     </h:body>
 </html>

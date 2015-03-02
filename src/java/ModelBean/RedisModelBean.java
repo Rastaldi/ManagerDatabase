@@ -40,29 +40,42 @@ public class RedisModelBean  implements Serializable {
     public boolean addRedisSet(String nameSet, String txtSetRedis){
         Jedis connJedis = new Jedis("localhost");
         connJedis.select(2);
-        connJedis.sadd(nameSet, txtSetRedis);
-        connJedis.bgsave();
-         return (connJedis.sadd(nameSet, txtSetRedis)) == 1;
+        //connJedis.sadd(nameSet, txtSetRedis);
+        
+        if (connJedis.sadd(nameSet, txtSetRedis) == 1) {
+            connJedis.bgsave();
+            return true;
+        }else {
+            return false;
+        }
+         
         
         
     }
     
-    public void removeSet(String nameRemoveSet, String valorRemoveSet){
+    public boolean removeSet(String nameRemoveSet, String valorRemoveSet){
         Jedis connJedis = new Jedis("localhost");
         connJedis.select(2);
         
-        connJedis.srem(nameRemoveSet, valorRemoveSet);
-        connJedis.bgsave();
+        if (connJedis.srem(nameRemoveSet, valorRemoveSet) == 1){
+             connJedis.bgsave();
+        return true;
+        }else {
+            return false;
+        }
         
     }
     
-    public void removeKey(String nameKeyRemove) {
+    public boolean removeKey(String nameKeyRemove) {
         Jedis connJedis = new Jedis("localhost");
         connJedis.select(2);
 
-        connJedis.del(nameKeyRemove);
-        connJedis.bgsave();
-        
+        if (connJedis.del(nameKeyRemove) == 1){
+         connJedis.bgsave();
+        return true;
+        }else {
+            return false;
+        }
     }
     
     public void addHashRedis(String nameHash, String nameKeyHash, String nameValueHash){
